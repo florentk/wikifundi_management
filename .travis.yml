@@ -1,1 +1,3 @@
 language: sh
+install: true
+script: sh test.sh
