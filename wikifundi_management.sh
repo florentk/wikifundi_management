@@ -32,53 +32,6 @@ function get_list_apps
   APPS=`sloppy show -r  $PROJECT | jq .[0].apps[].id | cut -d \" -f 2`
 }
 
-
-function sloppy_change
-{
-  PARAMS=$*
-  sloppy change $PARAMS
-}
-
-function delete_all
-{
-  if [ "$1" == "force" ]
-  then
-    rep="delete_all"
-  else
-    echo "type delete_all to confirm"
-    read rep
-  fi
-  if [ $rep == "delete_all" ]
-  then
-    sloppy_change sloppy-empty.json 
-  fi
-}
-
-function partial_mirroring
-{
-
-  sloppy_change sloppy-partial-mirroring.json
-  
-  wait_running
-  
-  sloppy_change sloppy.json
-}
-
-function full_mirroring
-{
-  delete_all "force"
-  
-  sleep $PAUSE
-  sleep $PAUSE
-  
-  sloppy_change sloppy-full-mirroring.json
-  
-  wait_running
-
-  sloppy_change sloppy.json
-  
-}
-
 function restart_app
 {
   echo "restart $app"
@@ -114,6 +67,52 @@ function restart
   fi
 }
 
+
+function sloppy_change
+{
+  PARAMS=$*
+  sloppy change $PARAMS
+}
+
+function delete_all
+{
+  if [ "$1" == "force" ]
+  then
+    rep="delete_all"
+  else
+    echo "type delete_all to confirm"
+    read rep
+  fi
+  if [ $rep == "delete_all" ]
+  then
+    sloppy_change sloppy-empty.json 
+  fi
+}
+
+function partial_mirroring
+{
+
+  sloppy_change sloppy-partial-mirroring.json
+  
+  wait_running
+  
+  restart_all
+}
+
+function full_mirroring
+{
+  delete_all "force"
+  
+  sleep $PAUSE
+  sleep $PAUSE
+  
+  sloppy_change sloppy-full-mirroring.json
+  
+  wait_running
+
+  restart_all
+  
+}
 
 ACTION=$1
 
