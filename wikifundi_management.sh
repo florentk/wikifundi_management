@@ -35,7 +35,7 @@ function get_list_apps
 
 function sloppy_change
 {
-  PARAMS=$1
+  PARAMS=$*
   sloppy change $PARAMS
 }
 
@@ -57,13 +57,7 @@ function delete_all
 function partial_mirroring
 {
 
-  get_list_apps
-  
-  for app in $APPS
-  do
-    sleep $PAUSE
-    sloppy_change $PROJECT/$PROJECT/$app -e "MIRRORING=1" -e "MIRRORING_OPTIONS=-ftud0"
-  done
+  sloppy_change sloppy-partial-mirroring.json
   
   wait_running
   
@@ -77,16 +71,11 @@ function full_mirroring
   sleep $PAUSE
   sleep $PAUSE
   
-  sloppy_change sloppy.json
+  sloppy_change sloppy-full-mirroring.json
   
   wait_running
-  get_list_apps
-  
-  for app in $APPS
-  do
-    sleep $PAUSE
-    sloppy_change $PROJECT/$PROJECT/$app -e "MIRRORING=1" -e "CLEAN=1"
-  done
+
+  sloppy_change sloppy.json
   
 }
 
