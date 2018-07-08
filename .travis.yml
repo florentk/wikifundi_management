@@ -1,8 +1,8 @@
 language: sh
 install: 
   - curl -L https://files.sloppy.io/sloppy-`uname -s`-`uname -m` > /tmp/sloppy
-  - cp /tmp/sloppy /usr/local/bin/sloppy
-  - chmod +x /usr/local/bin/sloppy
+  - sudo cp /tmp/sloppy /usr/local/bin/sloppy
+  - sudo chmod +x /usr/local/bin/sloppy
 script: sloppy show -r  wikifundi
 env:
   global:
