@@ -36,7 +36,7 @@ function get_list_apps
 function sloppy_change
 {
   PARAMS=$1
-  echo sloppy change $PARAMS
+  sloppy change $PARAMS
 }
 
 function delete_all
