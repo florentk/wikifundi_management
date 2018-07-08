@@ -38,6 +38,12 @@ function restart_app
   sloppy restart $PROJECT/$PROJECT/$app
 }
 
+function delete_app
+{
+  echo "delete $app"
+  sloppy delete $PROJECT/$PROJECT/$app
+}
+
 function restart_all
 {
   get_list_apps
@@ -85,13 +91,18 @@ function delete_all
   fi
   if [ $rep == "delete_all" ]
   then
-    sloppy_change sloppy-empty.json 
+    get_list_apps
+
+    for app in $APPS
+    do
+      delete_app
+      sleep $PAUSE
+    done
   fi
 }
 
 function partial_mirroring
 {
-
   sloppy_change sloppy-partial-mirroring.json
   
   wait_running
@@ -105,13 +116,10 @@ function full_mirroring
   
   sleep $PAUSE
   sleep $PAUSE
+  sleep $PAUSE
+  sleep $PAUSE
   
   sloppy_change sloppy-full-mirroring.json
-  
-  wait_running
-
-  restart_all
-  
 }
 
 ACTION=$1
