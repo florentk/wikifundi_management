@@ -1,9 +1,0 @@
-{
-  "project": "wikifundi",
-  "services":[
-    {
-        "id": "wikifundi",
-        "apps": []
-    }
- ]
-}
