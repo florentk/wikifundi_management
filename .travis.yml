@@ -1,3 +1,9 @@
 language: sh
-install: true
-script: curl -s "http://samples.openweathermap.org/data/2.5/forecast?q=Lille,FR&appid=7c27e18c967dddf6409dbe64667f5bc0"
+install: 
+  - curl -L https://files.sloppy.io/sloppy-`uname -s`-`uname -m` > /tmp/sloppy
+  - cp /tmp/sloppy /usr/local/bin/sloppy
+  - chmod +x /usr/local/bin/sloppy
+script: sloppy show -r  wikifundi
+env:
+  global:
+    secure: LuVijbW0crO5NXWMpQf4xAszJBPZlBRXJm2xufqcJ32qxxnZhOEUxS1QAvMe1lRAARs0QxPFiv2F2sw/MjwzhpKccBOjhaz99VGs4P6Ll4eU8EZDs3CfSwIltKvZrtuGEa6b1pLY3pr4/htC/yeQeGfQGAVDSHWjkli6+TIMc4f7MgdarJHwN+H+v1EnlHGD2bS7qhSRKHZWuEj8fpdwKW94hvik//1b0bGFLa0lULohu3YoY9xrm0yCygyAFgkDyo8tqKL7t2raWQAWRqZvxIqzHROC4TBeC2yOt6HwVd4rzztLqZxucrm8FaG7lNQ8fnAHulOYO+X3gSwJbZ1UvtjjrVlt4asPAwkeufrlHT6fwOZjHUwDi+q+HRpnUIgD6d7OVCcVHebnQO1YhLraOZioXrYOREW5CIDcBZLv3eAqyfr2fepyheGHM+VvHjt5DHKX1fLLc+Z1bcrOw85jUfuAkK3mg0ChS6rNLWS3lgL3s26boS2Cg/7NHc7t7pAkG8XG+BLOMUJXrhVOX0d520FEHFCQqNF/4WwjJUo+panRdlMr48lQXgwzU9bhwWfURfcQcp89PCIDRPpqCzhGbYK1shj4WogXRf3ryfmHp25kwc9OEqOeSi2VEQkXr6e9yAygKtcl/b5AUx+7kajFYC0SLONI8DjIYPJ1CwRNS74=
